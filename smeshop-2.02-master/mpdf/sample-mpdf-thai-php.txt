@@ -1,0 +1,28 @@
+<?php
+require ('connect.php')
+require_once('mpdf/mpdf.php');
+ob_start();
+?>
+
+<html>
+<head>
+<title></title>
+</head>
+<body>
+
+
+
+</body>
+</html>
+
+<?Php
+$html = ob_get_contents(); //เก็บค่า html ไว้ใน $html 
+ob_end_clean();
+$pdf = new mPDF('th', 'A4-L', '0', 'THSaraban'); //การตั้งค่ากระดาษถ้าต้องการแนวตั้ง ก็ A4 เฉยๆครับ ถ้าต้องการแนวนอนเท่ากับ A4-L
+$pdf->SetAutoFont();
+$pdf->SetDisplayMode('fullpage');
+$pdf->WriteHTML($html, 2);
+$pdf->Output("MyPDF/MyPDF.pdf");         // เก็บไฟล์ html ที่แปลงแล้วไว้ใน MyPDF/MyPDF.pdf 
+?>    
+
+ดาวโหลดรายงานในรูปแบบ PDF <a href="MyPDF/MyPDF.pdf">คลิกที่นี้</a>
